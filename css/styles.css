@@ -93,6 +93,50 @@ h2 {
     color: #e8e8ea; }
 
 /*PAGE ACCUEIL*/
+/*LOADING SPINNER */
+.loader {
+  z-index: 1;
+  animation: spin 1s 3 linear;
+  border: solid 2vmin transparent;
+  border-radius: 50%;
+  border-right-color: #9356DC;
+  border-top-color: #9356DC;
+  box-sizing: border-box;
+  height: 20vmin;
+  left: calc(50% - 10vmin);
+  position: fixed;
+  top: calc(50% - 10vmin);
+  width: 20vmin; }
+  .loader:before {
+    animation: spin 1s 2 linear;
+    border: solid 2vmin transparent;
+    border-radius: 50%;
+    border-right-color: #FF79DA;
+    border-top-color: #FF79DA;
+    box-sizing: border-box;
+    content: "";
+    height: 16vmin;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 16vmin; }
+  .loader:after {
+    animation: spin 1s 1 linear;
+    border: solid 2vmin transparent;
+    border-radius: 50%;
+    border-right-color: #99E2D0;
+    border-top-color: #99E2D0;
+    box-sizing: border-box;
+    content: "";
+    height: 12vmin;
+    left: 2vmin;
+    position: absolute;
+    top: 2vmin;
+    width: 12vmin; }
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg); } }
 /*PREMIERE SECTION : PRESENTATION */
 .present {
   background: #F5F5F6;
@@ -226,8 +270,32 @@ h2 {
     .heart:hover .heart__anim {
       opacity: 1;
       z-index: 1;
-      transform: scale(1.04); }
+      /* pour enlever la bordure noire. Mais moi je préfère avec, en mettant transform origin à bottom pour donner l'impression que le coeur se remplit !*/
+      transform: scale(1.1); }
   .heart__anim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: -webkit-linear-gradient(#FF79DA, #9356DC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    z-index: -1;
+    transform: scale(0);
+    transition: opacity 200ms, transform 300ms 100ms; }
+
+/*Essai d'une animation des coeurs différente quand on les survole */
+.heart1 {
+  position: relative;
+  z-index: 1; }
+  .heart1:hover {
+    cursor: pointer; }
+    .heart1:hover .heart1__anim {
+      opacity: 1;
+      transform: scale(1); }
+  .heart1__anim {
     position: absolute;
     top: 0;
     left: 0;
@@ -240,7 +308,7 @@ h2 {
     z-index: -1;
     transform-origin: bottom;
     transform: scale(0);
-    transition: opacity 500ms, transform 400ms 100ms; }
+    transition: opacity 100ms, transform 400ms; }
 
 /*PAGE RESTAURANT*/
 /*PREMIERE SECTION : ENTETE RESTAURANT */
