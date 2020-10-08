@@ -136,6 +136,83 @@ h2 {
 
 
 /*PAGE ACCUEIL*/
+
+/*LOADING SPINNER */
+
+.loader {
+    z-index: 1;
+    animation: spin 3s forwards linear;
+    border: solid 2vmin transparent;
+    border-radius: 50%;
+    border-right-color: $color-primary;
+    border-top-color: $color-primary;
+    box-sizing: border-box;
+    height: 20vmin;
+    left: calc(50% - 10vmin);
+    position: fixed;
+    top: calc(50% - 10vmin);
+    width: 20vmin;
+    opacity: 0;
+    &:before {
+        animation: spin 3s 250ms forwards linear;
+        border: solid 2vmin transparent;
+        border-radius: 50%;
+        border-right-color: $color-secondary;
+        border-top-color: $color-secondary;
+        box-sizing: border-box;
+        content: "";
+        height: 16vmin;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 16vmin;
+        opacity: 0;
+  }
+  &:after {
+        animation: spin 3s 500ms forwards linear;
+        border: solid 2vmin transparent;
+        border-radius: 50%;
+        border-right-color: $color-tertiary;
+        border-top-color: $color-tertiary;
+        box-sizing: border-box;
+        content: "";
+        height: 12vmin;
+        left: 2vmin;
+        position: absolute;
+        top: 2vmin;
+        width: 12vmin;
+        opacity: 0;
+  }
+}
+
+@keyframes spin {
+    5% {
+        opacity: 1;
+    }
+    25% {
+        transform: rotate(180deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    75% {
+        transform: rotate(540deg);
+        opacity: 1;
+    }
+    80% {
+        transform: rotate(576deg);
+        opacity: 0.5;
+    }
+    90% {
+        transform: rotate(648deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(720deg);
+        opacity: 0;
+    }
+}
+
 /*PREMIERE SECTION : PRESENTATION */
 
 .present {
@@ -297,8 +374,8 @@ h2 {
         cursor: pointer;
         & .heart__anim {
             opacity: 1;
-            z-index: 1;
-            transform: scale(1.04);
+            z-index: 1; /* pour enlever la bordure noire. Mais moi je préfère avec, en mettant transform origin à bottom pour donner l'impression que le coeur se remplit !*/
+            transform: scale(1.1);
         }
     }
     &__anim {
@@ -308,19 +385,46 @@ h2 {
         bottom: 0; 
         right: 0;
         background: -webkit-linear-gradient($color-secondary, $color-primary);
-        -webkit-background-clip: text;
+        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
+        -webkit-text-fill-color: transparent;
+        opacity: 0;
+        z-index: -1;
+        transform: scale(0);
+        transition: opacity 200ms, transform 300ms 100ms;
+    }
+}
+
+/*Essai d'une animation des coeurs différente quand on les survole */
+
+.heart1 {
+    position: relative;
+    z-index: 1;
+    &:hover {
+        cursor: pointer;
+        & .heart1__anim {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    &__anim {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0; 
+        right: 0;
+        background: -webkit-linear-gradient($color-secondary, $color-primary);
+        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
         -webkit-text-fill-color: transparent;
         opacity: 0;
         z-index: -1;
         transform-origin: bottom;
         transform: scale(0);
-        transition: opacity 500ms, transform 400ms 100ms;
+        transition: opacity 100ms, transform 400ms;
     }
 }
 
 
 /*PAGE RESTAURANT*/
-
 
 /*PREMIERE SECTION : ENTETE RESTAURANT */
 

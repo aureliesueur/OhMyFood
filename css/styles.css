@@ -96,7 +96,7 @@ h2 {
 /*LOADING SPINNER */
 .loader {
   z-index: 1;
-  animation: spin 1s 3 linear;
+  animation: spin 3s forwards linear;
   border: solid 2vmin transparent;
   border-radius: 50%;
   border-right-color: #9356DC;
@@ -106,9 +106,10 @@ h2 {
   left: calc(50% - 10vmin);
   position: fixed;
   top: calc(50% - 10vmin);
-  width: 20vmin; }
+  width: 20vmin;
+  opacity: 0; }
   .loader:before {
-    animation: spin 1s 2 linear;
+    animation: spin 3s 250ms forwards linear;
     border: solid 2vmin transparent;
     border-radius: 50%;
     border-right-color: #FF79DA;
@@ -119,9 +120,10 @@ h2 {
     left: 0;
     position: absolute;
     top: 0;
-    width: 16vmin; }
+    width: 16vmin;
+    opacity: 0; }
   .loader:after {
-    animation: spin 1s 1 linear;
+    animation: spin 3s 500ms forwards linear;
     border: solid 2vmin transparent;
     border-radius: 50%;
     border-right-color: #99E2D0;
@@ -132,11 +134,28 @@ h2 {
     left: 2vmin;
     position: absolute;
     top: 2vmin;
-    width: 12vmin; }
+    width: 12vmin;
+    opacity: 0; }
 
 @keyframes spin {
+  5% {
+    opacity: 1; }
+  25% {
+    transform: rotate(180deg); }
+  50% {
+    transform: rotate(360deg); }
+  75% {
+    transform: rotate(540deg);
+    opacity: 1; }
+  80% {
+    transform: rotate(576deg);
+    opacity: 0.5; }
+  90% {
+    transform: rotate(648deg);
+    opacity: 0; }
   100% {
-    transform: rotate(360deg); } }
+    transform: rotate(720deg);
+    opacity: 0; } }
 /*PREMIERE SECTION : PRESENTATION */
 .present {
   background: #F5F5F6;
