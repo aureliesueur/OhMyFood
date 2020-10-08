@@ -53,8 +53,27 @@ h2 {
     text-align: center;
     @include textpolice2;
     @include boxshadow;
+    position: relative;
+    z-index: 1;
     &:hover {
         cursor:pointer;
+        & .btn__bg {
+            opacity: 1;
+        }
+    }
+    /* Création de l'animation au survol des boutons principaux, avec la propriété "opacity" pour ne pas ralentir le temps de chargement */
+    &__bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom right, $color-secondary 2%, lighten($color-primary, 15%));
+        @include boxshadow(darken($color-bkg, 10%));
+        border-radius: 30px;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 250ms;
     }
 }
 
@@ -249,14 +268,13 @@ h2 {
         color: darken($color-tertiary, 35%);
         padding: 5px 10px;
     }
-    &__icon {
-        position: absolute;
-        top: 30%;
-        right: 30px;
+    &__icon { // A fusionner avec .heart après !!!!
+        float: right;
+        margin-top: 20px;
+        margin-right: 20px;
         font-size: 1.5em;
         &:hover {
-            color: $color-primary;
-            cursor: pointer;   
+            cursor: pointer;  
         }
     }
     &__byline {
@@ -267,12 +285,38 @@ h2 {
         text-decoration: none;
         color: #000;
         width: 100%;
-        &:hover {
-            color: $color-secondary;
-        }
-    }
+    } 
 }
 
+/*Création de l'animation des coeurs qui se remplissent quand on les survole */
+
+.heart {
+    position: relative;
+    z-index: 1;
+    &:hover {
+        cursor: pointer;
+        & .heart__anim {
+            opacity: 1;
+            z-index: 1;
+            transform: scale(1.04);
+        }
+    }
+    &__anim {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0; 
+        right: 0;
+        background: -webkit-linear-gradient($color-secondary, $color-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0;
+        z-index: -1;
+        transform-origin: bottom;
+        transform: scale(0);
+        transition: opacity 500ms, transform 400ms 100ms;
+    }
+}
 
 
 /*PAGE RESTAURANT*/

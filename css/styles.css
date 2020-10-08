@@ -25,9 +25,26 @@ h2 {
   width: 50%;
   text-align: center;
   font-family: "Open Sans", "Roboto", Verdana, sans-serif;
-  box-shadow: 2px 4px 8px 3px #dadade; }
+  box-shadow: 2px 4px 8px 3px #dadade;
+  position: relative;
+  z-index: 1;
+  /* Création de l'animation au survol des boutons principaux, avec la propriété "opacity" pour ne pas ralentir le temps de chargement */ }
   .btn:hover {
     cursor: pointer; }
+    .btn:hover .btn__bg {
+      opacity: 1; }
+  .btn__bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom right, #FF79DA 2%, #bc95e9);
+    box-shadow: 2px 4px 8px 3px #bfbfc6;
+    border-radius: 30px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 250ms; }
 
 .header {
   box-shadow: 2px 4px 8px 3px #dadade;
@@ -186,12 +203,11 @@ h2 {
     color: #2c9c81;
     padding: 5px 10px; }
   .rest__icon {
-    position: absolute;
-    top: 30%;
-    right: 30px;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
     font-size: 1.5em; }
     .rest__icon:hover {
-      color: #9356DC;
       cursor: pointer; }
   .rest__byline {
     font-family: "Open Sans", "Roboto", Verdana, sans-serif;
@@ -200,8 +216,31 @@ h2 {
     text-decoration: none;
     color: #000;
     width: 100%; }
-    .rest__link:hover {
-      color: #FF79DA; }
+
+/*Création de l'animation des coeurs qui se remplissent quand on les survole */
+.heart {
+  position: relative;
+  z-index: 1; }
+  .heart:hover {
+    cursor: pointer; }
+    .heart:hover .heart__anim {
+      opacity: 1;
+      z-index: 1;
+      transform: scale(1.04); }
+  .heart__anim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: -webkit-linear-gradient(#FF79DA, #9356DC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    z-index: -1;
+    transform-origin: bottom;
+    transform: scale(0);
+    transition: opacity 500ms, transform 400ms 100ms; }
 
 /*PAGE RESTAURANT*/
 /*PREMIERE SECTION : ENTETE RESTAURANT */
