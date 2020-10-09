@@ -41,6 +41,9 @@ h1 {
 h2 {
     font-size: 1.2em;
 }
+h3 {
+    font-size: 1.2em;
+}
 
 
 .btn {
@@ -139,7 +142,7 @@ h2 {
 
 /*Création et animation du loading spinner */
 
-.loader {
+.loader__spinner  {
     z-index: 2;
     animation: spin 3s forwards linear;
     border: solid 15px transparent;
@@ -211,7 +214,7 @@ h2 {
 }
 
 /*Création et animation du background du loading spinner */
-.loader-bkg {
+.loader__bkg {
     background: rgba(153, 226, 208, 0.5);
     background-size: cover;
     width: 100%;
@@ -367,7 +370,7 @@ h2 {
         color: darken($color-tertiary, 35%);
         padding: 5px 10px;
     }
-    &__icon { // A fusionner avec .heart après !!!!
+    &__icon { // A fusionner avec .heart après, une fois animation choisie parmi les deux !!!!
         float: right;
         margin-top: 20px;
         margin-right: 20px;
@@ -384,6 +387,11 @@ h2 {
         text-decoration: none;
         color: #000;
         width: 100%;
+        &:hover {
+            p, h2 {
+                color: $color-secondary;
+            }
+        }
     } 
 }
 
@@ -394,9 +402,10 @@ h2 {
     z-index: 1;
     &:hover {
         cursor: pointer;
+        color: $color-white;
         & .heart__anim {
             opacity: 1;
-            z-index: 1; /* pour enlever la bordure noire. Mais moi je préfère avec, en mettant transform origin à bottom pour donner l'impression que le coeur se remplit !, cf anim suivante*/
+            z-index: 1; 
             transform: scale(1) translateY(1);
         }
     }
@@ -416,7 +425,7 @@ h2 {
     }
 }
 
-/*Essai d'une animation des coeurs différente quand on les survole */
+/*Essai d'une animation des coeurs différente quand on les survole, qui donne l'impression qu'un coeur en verre se remplit comme un verre de vin */
 
 .heart1 {
     position: relative;
@@ -467,6 +476,7 @@ h2 {
         margin-top: -40px;
         border-radius: 40px 40px 0 0;
         position: absolute;
+        top: 320px;
         z-index: 2;
         h1 {
             padding: 5px 0 0 20px;
@@ -474,7 +484,9 @@ h2 {
             font-weight: normal;
         }
         i {
-            padding-top: 10px;
+            position: absolute;
+            top: 17px;
+            right: 20px;
         }
     }
 }
@@ -495,6 +507,8 @@ h2 {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    opacity: 1;
+    transform: translateY(0);
     &__heading {
         padding-top: 5px;
         text-transform: uppercase;
@@ -515,29 +529,139 @@ h2 {
         margin-bottom: 20px;
         border-radius: 20px;
         padding: 5px 0 8px 15px;
-        line-height: 8px;
-        p {
-            @include textpolice2;
-        }
-        span {
-            float: right;
-            font-weight: bold;
-            margin-right: 15px;
-            @include textpolice1;
-        }
+        line-height: 20px;
         &:hover, &:active {
             background: transparentize($color-primary, 0.85);
         }
     }
 }
 
-.starters {
+.elt {
+    display: flex;
+    justify-content: space-between; 
+    position: relative;
+    &__price {
+        position: absolute;
+        right: 10px;
+        top: 48px;
+        font-weight: bold;
+        @include textpolice1;
+        margin-right: 15px;
+        transform:translateX(0);
+        transition: transform 300ms 100ms linear;/*Prépare l'animation où le prix bouge*/
+    }
+    &__details {
+        width: 75%;
+        h3, p {
+            overflow: hidden;/* Pour éviter que le texte se mette à la ligne d'une façon peu esthétique*/
+            white-space: nowrap;
+            text-overflow: ellipsis; 
+        }
+        p {
+            @include textpolice2;
+            margin-top: 0px;
+            margin-bottom: 6px;
+            font-size: 1em;
+        }
+        h3 {
+            margin-bottom: 6px;
+            margin-top: 15px;
+        }
+    }
+}
+
+.starters__heading {
     padding-top: 40px;
+    z-index: 2;
 }
 
 .btn-order {
     margin: 20px auto 40px auto;
 }
+
+/* Création de l'animation du menu à l'arrivée sur la page */
+
+.starters {
+    animation: revelation 700ms both ease-in-out;
+}
+.courses {
+    animation: revelation 700ms 400ms both ease-in-out;
+}
+.desserts {
+    animation: revelation 700ms 800ms both ease-in-out;
+}
+
+@keyframes revelation {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Création de l'animation de la case à cocher sur les plats */
+
+.anim {
+    &__container {
+        background: $color-tertiary;
+        position: relative;
+        @include boxshadow(lighten($color-bkg, 80%));
+        border-radius: 0 20px 20px 0;
+        height: 120%;
+        width: 80px;
+        margin-top: -5px;
+        margin-bottom: -8px;
+        opacity: 0;
+        transform:translateX(100%);
+        transition: opacity 100ms, transform 300ms 100ms linear;
+    }
+    &__circle {
+        background: $color-white;
+        position: absolute;
+        top: calc(50% - 18px);
+        left: calc(50% - 18px);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        transform:rotate(0deg);
+        transition: transform 300ms linear;
+    }
+    &__icon {
+        border-top: 5px solid $color-tertiary;
+        border-left: 5px solid $color-tertiary;
+        position: absolute;
+        top: 4px;
+        left: 8px;
+        width: 10px;
+        height: 14px;
+        border-radius: 1px;
+        transform: rotate(220deg);    
+    }
+}
+
+.elt:hover {
+    background: transparentize($color-primary, 0.85);/* Pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du background sur hover -pour uniformiser avec page d'accueil- et l'apparition de la case verte sur active*/
+    cursor: pointer;
+    .elt__price {
+        transform: translateX(-70px);
+    }
+    .elt__details {
+        width: 50%;
+        }
+    .anim {
+        &__container {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        &__circle {
+                transform: rotate(360deg);
+        }
+    }
+}
+
 
 /* MEDIA QUERIES POUR ADAPTER LE SITE A UN ECRAN TABLETTE*/
 
@@ -683,8 +807,27 @@ h2 {
     }
 }
 
+/* MEDIA QUERIES POUR ADAPTER LE SITE A UN ECRAN DESKTOP LARGE*/
 
+@media screen and (min-width: 1224px) {
+    .restheader {
+        height: 230px;
+        &__title {
+        padding-bottom: 60px;
+        }
+    }
+    .starters__heading {
+        padding-top: 80px;
+    }
+}
 
+/*RESTE A FAIRE
+Changer la mise en page pour desktop sur les pages restaurants
+retravailler largeur de l'animation "..." ?
+Ajouter une media query intermédiaire entre iphone et ipad
+Bugs :
+- le lien photo du premier resto ne marche pas,
+- le changement de couleur du bkg sur les options ne marche plus.*/
 
 
 
