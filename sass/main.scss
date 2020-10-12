@@ -57,7 +57,7 @@ h3 {
     @include textpolice2;
     @include boxshadow;
     position: relative;
-    z-index: 1;
+    z-index: 2;
     &:hover {
         cursor:pointer;
         & .btn__bg {
@@ -138,7 +138,7 @@ h3 {
 }
 
 
-/*PAGE ACCUEIL*/
+/*PAGE D'ACCUEIL*/
 
 /*Création et animation du loading spinner */
 
@@ -164,6 +164,7 @@ h3 {
         border-top-color: $color-secondary;
         box-sizing: border-box;
         content: "";
+        z-index: 3;
         height: 120px;
         width: 120px;
         position: absolute;
@@ -179,6 +180,7 @@ h3 {
         border-top-color: $color-tertiary;
         box-sizing: border-box;
         content: "";
+        z-index: 3;
         height: 90px;
         width: 90px;
         position: absolute;
@@ -215,14 +217,14 @@ h3 {
 
 /*Création et animation du background du loading spinner */
 .loader__bkg {
-    background: rgba(153, 226, 208, 0.5);
+    background: rgba(153, 226, 208, 0.8);
     background-size: cover;
     width: 100%;
-    height: 1300px;
+    height: 250%;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     opacity:0;
     animation: bkg 3s;
 }
@@ -287,12 +289,12 @@ h3 {
         margin-bottom: 25px;
         font-size: 1.1em;
         position: relative;
-        z-index: 2; 
+        z-index: 2;    
     } 
 }
 
 .option {
-    &:hover {
+    &:hover {// Animation des options au survol
         background: transparentize($color-primary, 0.85);
         cursor: pointer;
         .option__icon {
@@ -370,17 +372,13 @@ h3 {
         color: darken($color-tertiary, 35%);
         padding: 5px 10px;
     }
-    &__icon { // A fusionner avec .heart après, une fois animation choisie parmi les deux !!!!
+    &__icon { 
         float: right;
         margin-top: 20px;
         margin-right: 20px;
         font-size: 1.5em;
         position: relative;
         z-index: 1;
-        &:hover {
-            cursor: pointer; 
-            color: black;
-        }
     }
     &__byline {
         @include textpolice2;
@@ -392,14 +390,17 @@ h3 {
         width: 100%;
         height: 100%;
         z-index: 2;
-        &:hover {
+        &:hover { //Animation des cases restaurants au survol
             cursor: pointer;
             color: $color-secondary;
         }
     } 
 }
 
-/*Création de l'animation des coeurs qui se remplissent quand on les survole */
+/*Création de l'animation des coeurs qui se remplissent quand on les survole. 
+
+Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du texte sur hover et le remplissage du coeur uniquement sur active.
+*/
 
 .heart {
     &:hover {
@@ -408,7 +409,7 @@ h3 {
         & .heart__anim {
             opacity: 1;
             z-index: 1; 
-            transform: scale(1) translateY(1);
+            transform: scale(1);
         }
     }
     &__anim {
@@ -422,7 +423,7 @@ h3 {
         -webkit-text-fill-color: transparent;
         opacity: 0;
         z-index: -1;
-        transform: scale(0) translateY(0.8);
+        transform: scale(0);
         transition: opacity 200ms, transform 300ms 100ms;
     }
 }
@@ -456,7 +457,7 @@ h3 {
 }
 
 
-/*PAGE RESTAURANT*/
+/*PAGE RESTAURANT (CSS IDENTIQUE POUR LES 4) */
 
 /*PREMIERE SECTION : ENTETE RESTAURANT */
 
@@ -492,7 +493,6 @@ h3 {
     }
 }
 
-
 /*DEUXIEME SECTION : MENU */
 
 .menu {
@@ -515,7 +515,7 @@ h3 {
         text-transform: uppercase;
         font-weight: normal;
         @include textpolice2;
-        &::after {
+        &::after { // Ligne en-dessous du titre
             content: "";
             display: block;
             width:60%;
@@ -531,16 +531,16 @@ h3 {
         border-radius: 20px;
         padding: 5px 0 8px 15px;
         line-height: 20px;
-        &:hover, &:active {
+        display: flex;
+        justify-content: space-between; 
+        position: relative;
+        &:hover, &:active { // Changement de couleur de l'élément au survol
             background: transparentize($color-primary, 0.85);
         }
     }
 }
 
 .elt {
-    display: flex;
-    justify-content: space-between; 
-    position: relative;
     &__price {
         position: absolute;
         right: 10px;
@@ -548,13 +548,14 @@ h3 {
         font-weight: bold;
         @include textpolice1;
         margin-right: 15px;
-        transform:translateX(0);
-        transition: transform 300ms 100ms linear;/*Prépare l'animation où le prix bouge*/
+        transform-origin: right;
+        transform:  scaleX(1);
+        transition: transform 300ms 100ms linear;//Prépare l'animation où le prix bouge
     }
     &__details {
         width: 75%;
         h3, p {
-            overflow: hidden;/* Pour éviter que le texte se mette à la ligne d'une façon peu esthétique*/
+            overflow: hidden; //Pour éviter que le texte se mette à la ligne d'une façon peu esthétique
             white-space: nowrap;
             text-overflow: ellipsis; 
         }
@@ -616,7 +617,8 @@ h3 {
         margin-top: -5px;
         margin-bottom: -8px;
         opacity: 0;
-        transform:translateX(100%);
+        transform-origin: right;
+        transform: scaleX(0);
         transition: opacity 100ms, transform 300ms 100ms linear;
     }
     &__circle {
@@ -628,7 +630,7 @@ h3 {
         width: 32px;
         height: 32px;
         transform:rotate(0deg);
-        transition: transform 300ms linear;
+        transition: transform 300ms 100ms linear;
     }
     &__icon {
         border-top: 5px solid $color-tertiary;
@@ -644,7 +646,8 @@ h3 {
 }
 
 .elt:hover {
-    background: transparentize($color-primary, 0.85);/* Pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du background sur hover -pour uniformiser avec page d'accueil- et l'apparition de la case verte sur active*/
+    background: transparentize($color-primary, 0.85);
+    /* Pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du background sur hover -pour uniformiser avec page d'accueil- et l'apparition de la case verte sur active*/
     cursor: pointer;
     .elt__price {
         transform: translateX(-70px);
@@ -655,7 +658,7 @@ h3 {
     .anim {
         &__container {
             opacity: 1;
-            transform: translateX(0);
+            transform: scaleX(1);
         }
         &__circle {
                 transform: rotate(360deg);
@@ -664,7 +667,7 @@ h3 {
 }
 
 
-/* MEDIA QUERIES INTERMEDIAIRE POUR HOMOGENEISER ENTRE SMARTPHONE ET TABLETTE*/
+/* MEDIA QUERIES INTERMEDIAIRE POUR EVITER BUGS DE MISE EN PAGE ENTRE SMARTPHONE ET TABLETTE*/
 
 @media screen and (min-width : 480px) and (max-width : 710px) {
     .btn {
@@ -685,8 +688,7 @@ h3 {
         }
     }
 }
-
-    
+  
 /* MEDIA QUERIES POUR ADAPTER LE SITE A UN ECRAN TABLETTE*/
 
 @media screen and (min-width : 710px) and (max-width : 1024px) {
@@ -820,8 +822,8 @@ h3 {
         align-items: flex-start;
         flex-wrap: nowrap;
         padding-top: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 30px;
+        padding-right: 20px;
     }
     .starters__heading {
         padding-top: 0px;
@@ -829,7 +831,8 @@ h3 {
     .starters, .courses, .desserts {
         padding-left: 0;
         padding-right: 10px;
-        width: 30%;
+        padding-left:0px;
+        width: 32%;
         &__heading {
             align-self: center;
         }
@@ -855,15 +858,6 @@ h3 {
     width: 40%;   
     }
 }
-
-
-
-/*RESTE A FAIRE
-
-L'anim case verte est bien mais part de la droite alors qu'elle devrait commencer à la limite de la div
-Bugs :
-- Faut-il trouver une autre solution pour le bkg du loader ?
-- changer les unités de mesure de scale et translate*/
 
 
 

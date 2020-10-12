@@ -30,7 +30,7 @@ h3 {
   font-family: "Open Sans", "Roboto", Verdana, sans-serif;
   box-shadow: 2px 4px 8px 3px #dadade;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   /* Création de l'animation au survol des boutons principaux, avec la propriété "opacity" pour ne pas ralentir le temps de chargement */ }
   .btn:hover {
     cursor: pointer; }
@@ -95,7 +95,7 @@ h3 {
     width: 3%;
     color: #e8e8ea; }
 
-/*PAGE ACCUEIL*/
+/*PAGE D'ACCUEIL*/
 /*Création et animation du loading spinner */
 .loader__spinner {
   z-index: 3;
@@ -119,6 +119,7 @@ h3 {
     border-top-color: #FF79DA;
     box-sizing: border-box;
     content: "";
+    z-index: 3;
     height: 120px;
     width: 120px;
     position: absolute;
@@ -133,6 +134,7 @@ h3 {
     border-top-color: #99E2D0;
     box-sizing: border-box;
     content: "";
+    z-index: 3;
     height: 90px;
     width: 90px;
     position: absolute;
@@ -159,14 +161,14 @@ h3 {
     opacity: 0; } }
 /*Création et animation du background du loading spinner */
 .loader__bkg {
-  background: rgba(153, 226, 208, 0.5);
+  background: rgba(153, 226, 208, 0.8);
   background-size: cover;
   width: 100%;
-  height: 1300px;
+  height: 250%;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   opacity: 0;
   animation: bkg 3s; }
 
@@ -292,9 +294,6 @@ h3 {
     font-size: 1.5em;
     position: relative;
     z-index: 1; }
-    .rest__icon:hover {
-      cursor: pointer;
-      color: black; }
   .rest__byline {
     font-family: "Open Sans", "Roboto", Verdana, sans-serif;
     font-size: 1.1em; }
@@ -308,14 +307,17 @@ h3 {
       cursor: pointer;
       color: #FF79DA; }
 
-/*Création de l'animation des coeurs qui se remplissent quand on les survole */
+/*Création de l'animation des coeurs qui se remplissent quand on les survole. 
+
+Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du texte sur hover et le remplissage du coeur uniquement sur active.
+*/
 .heart:hover {
   cursor: pointer;
   color: #FFF; }
   .heart:hover .heart__anim {
     opacity: 1;
     z-index: 1;
-    transform: scale(1) translateY(1); }
+    transform: scale(1); }
 .heart__anim {
   position: absolute;
   top: 0;
@@ -327,7 +329,7 @@ h3 {
   -webkit-text-fill-color: transparent;
   opacity: 0;
   z-index: -1;
-  transform: scale(0) translateY(0.8);
+  transform: scale(0);
   transition: opacity 200ms, transform 300ms 100ms; }
 
 /*Essai d'une animation des coeurs différente quand on les survole, qui donne l'impression qu'un coeur en verre se remplit comme un verre de vin */
@@ -352,7 +354,7 @@ h3 {
   transform: scale(0);
   transition: opacity 100ms, transform 400ms; }
 
-/*PAGE RESTAURANT*/
+/*PAGE RESTAURANT (CSS IDENTIQUE POUR LES 4) */
 /*PREMIERE SECTION : ENTETE RESTAURANT */
 .restheader {
   width: 100%; }
@@ -414,39 +416,37 @@ h3 {
     margin-bottom: 20px;
     border-radius: 20px;
     padding: 5px 0 8px 15px;
-    line-height: 20px; }
+    line-height: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: relative; }
     .starters__elt:hover, .starters__elt:active, .courses__elt:hover, .courses__elt:active, .desserts__elt:hover, .desserts__elt:active {
       background: rgba(147, 86, 220, 0.15); }
 
-.elt {
-  display: flex;
-  justify-content: space-between;
-  position: relative; }
-  .elt__price {
-    position: absolute;
-    right: 10px;
-    top: 48px;
-    font-weight: bold;
-    font-family: "Roboto", Verdana, Trebuchet, sans-serif;
-    margin-right: 15px;
-    transform: translateX(0);
-    transition: transform 300ms 100ms linear;
-    /*Prépare l'animation où le prix bouge*/ }
-  .elt__details {
-    width: 75%; }
-    .elt__details h3, .elt__details p {
-      overflow: hidden;
-      /* Pour éviter que le texte se mette à la ligne d'une façon peu esthétique*/
-      white-space: nowrap;
-      text-overflow: ellipsis; }
-    .elt__details p {
-      font-family: "Open Sans", "Roboto", Verdana, sans-serif;
-      margin-top: 0px;
-      margin-bottom: 6px;
-      font-size: 1em; }
-    .elt__details h3 {
-      margin-bottom: 6px;
-      margin-top: 15px; }
+.elt__price {
+  position: absolute;
+  right: 10px;
+  top: 48px;
+  font-weight: bold;
+  font-family: "Roboto", Verdana, Trebuchet, sans-serif;
+  margin-right: 15px;
+  transform-origin: right;
+  transform: scaleX(1);
+  transition: transform 300ms 100ms linear; }
+.elt__details {
+  width: 75%; }
+  .elt__details h3, .elt__details p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+  .elt__details p {
+    font-family: "Open Sans", "Roboto", Verdana, sans-serif;
+    margin-top: 0px;
+    margin-bottom: 6px;
+    font-size: 1em; }
+  .elt__details h3 {
+    margin-bottom: 6px;
+    margin-top: 15px; }
 
 .starters__heading {
   padding-top: 40px;
@@ -483,7 +483,8 @@ h3 {
   margin-top: -5px;
   margin-bottom: -8px;
   opacity: 0;
-  transform: translateX(100%);
+  transform-origin: right;
+  transform: scaleX(0);
   transition: opacity 100ms, transform 300ms 100ms linear; }
 .anim__circle {
   background: #FFF;
@@ -494,7 +495,7 @@ h3 {
   width: 32px;
   height: 32px;
   transform: rotate(0deg);
-  transition: transform 300ms linear; }
+  transition: transform 300ms 100ms linear; }
 .anim__icon {
   border-top: 5px solid #99E2D0;
   border-left: 5px solid #99E2D0;
@@ -516,11 +517,11 @@ h3 {
     width: 50%; }
   .elt:hover .anim__container {
     opacity: 1;
-    transform: translateX(0); }
+    transform: scaleX(1); }
   .elt:hover .anim__circle {
     transform: rotate(360deg); }
 
-/* MEDIA QUERIES INTERMEDIAIRE POUR HOMOGENEISER ENTRE SMARTPHONE ET TABLETTE*/
+/* MEDIA QUERIES INTERMEDIAIRE POUR EVITER BUGS DE MISE EN PAGE ENTRE SMARTPHONE ET TABLETTE*/
 @media screen and (min-width: 480px) and (max-width: 710px) {
   .btn {
     width: 50%; }
@@ -656,8 +657,8 @@ h3 {
     align-items: flex-start;
     flex-wrap: nowrap;
     padding-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px; }
+    padding-left: 30px;
+    padding-right: 20px; }
 
   .starters__heading {
     padding-top: 0px; }
@@ -665,7 +666,8 @@ h3 {
   .starters, .courses, .desserts {
     padding-left: 0;
     padding-right: 10px;
-    width: 30%; }
+    padding-left: 0px;
+    width: 32%; }
     .starters__heading, .courses__heading, .desserts__heading {
       align-self: center; }
 
@@ -685,11 +687,5 @@ h3 {
 
   .rest {
     width: 40%; } }
-/*RESTE A FAIRE
-
-L'anim case verte est bien mais part de la droite alors qu'elle devrait commencer à la limite de la div
-Bugs :
-- Faut-il trouver une autre solution pour le bkg du loader ?
-- changer les unités de mesure de scale et translate*/
 
 /*# sourceMappingURL=styles.css.map */
