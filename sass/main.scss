@@ -137,6 +137,66 @@ h3 {
     }   
 }
 
+/*Création de l'animation des coeurs qui se remplissent quand on les survole. 
+
+Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du texte sur hover et le remplissage du coeur uniquement sur active.
+*/
+
+.heart {
+    &:hover {
+        cursor: pointer;
+        color: $color-white;
+        & .heart__anim {
+            opacity: 1;
+            z-index: 1; 
+            transform: scale(1);
+        }
+    }
+    &__anim {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0; 
+        right: 0;
+        background: -webkit-linear-gradient($color-secondary, $color-primary);
+        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
+        -webkit-text-fill-color: transparent;
+        opacity: 0;
+        z-index: -1;
+        transform: scale(0);
+        transition: opacity 200ms, transform 300ms 100ms;
+    }
+}
+
+/*Essai d'une animation des coeurs différente quand on les survole, qui donne l'impression qu'un coeur en verre se remplit comme un verre de vin */
+
+.heart1 {
+    &:hover {
+        cursor: pointer;
+        color: black;
+        & .heart1__anim {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    &__anim {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0; 
+        right: 0;
+        background: -webkit-linear-gradient($color-secondary, $color-primary);
+        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
+        -webkit-text-fill-color: transparent;
+        opacity: 0;
+        z-index: -1;
+        transform-origin: bottom;
+        transform: scale(0);
+        transition: opacity 100ms, transform 400ms;
+    }
+}
+
+
 
 /*PAGE D'ACCUEIL*/
 
@@ -256,7 +316,7 @@ h3 {
 } 
 
 /*Animation de la page à afficher après le load spinner */
-.pageaafficher {
+.pagetoload {
     z-index: 3;
     opacity: 1;
     animation: page 2s 2s both;
@@ -273,6 +333,7 @@ h3 {
         opacity: 1;
     }
 } 
+
 
 
 /*PREMIERE SECTION : PRESENTATION */
@@ -432,65 +493,6 @@ h3 {
     } 
 }
 
-/*Création de l'animation des coeurs qui se remplissent quand on les survole. 
-
-Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais à terme on aura le changement de couleur du texte sur hover et le remplissage du coeur uniquement sur active.
-*/
-
-.heart {
-    &:hover {
-        cursor: pointer;
-        color: $color-white;
-        & .heart__anim {
-            opacity: 1;
-            z-index: 1; 
-            transform: scale(1);
-        }
-    }
-    &__anim {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0; 
-        right: 0;
-        background: -webkit-linear-gradient($color-secondary, $color-primary);
-        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
-        -webkit-text-fill-color: transparent;
-        opacity: 0;
-        z-index: -1;
-        transform: scale(0);
-        transition: opacity 200ms, transform 300ms 100ms;
-    }
-}
-
-/*Essai d'une animation des coeurs différente quand on les survole, qui donne l'impression qu'un coeur en verre se remplit comme un verre de vin */
-
-.heart1 {
-    &:hover {
-        cursor: pointer;
-        color: black;
-        & .heart1__anim {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    &__anim {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0; 
-        right: 0;
-        background: -webkit-linear-gradient($color-secondary, $color-primary);
-        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
-        -webkit-text-fill-color: transparent;
-        opacity: 0;
-        z-index: -1;
-        transform-origin: bottom;
-        transform: scale(0);
-        transition: opacity 100ms, transform 400ms;
-    }
-}
-
 
 /*PAGE RESTAURANT (CSS IDENTIQUE POUR LES 4) */
 
@@ -520,10 +522,10 @@ Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais �
             font-size: 1.9em;
             font-weight: normal;
         }
-        i {
-            position: absolute;
-            top: 17px;
-            right: 20px;
+        .heart {
+            margin-top: -50px;
+            margin-right: 20px;
+            margin-left: 20px;
         }
     }
 }
