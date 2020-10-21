@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 /*DECLARATION DES VARIABLES ET DES MIXIN SASS */
 /*GENERAL */
 body {
@@ -240,7 +240,7 @@ Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais �
     transform: scale(0);
     display: none; } }
 /*Animation de la page à afficher après le load spinner */
-.pagetoload {
+#pagetoload {
   z-index: 3;
   opacity: 1;
   animation: page 2s 2s both; }

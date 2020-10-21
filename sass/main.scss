@@ -197,7 +197,6 @@ Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais �
 }
 
 
-
 /*PAGE D'ACCUEIL*/
 
 /*Création et animation du loading spinner */
@@ -316,7 +315,7 @@ Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais �
 } 
 
 /*Animation de la page à afficher après le load spinner */
-.pagetoload {
+#pagetoload {
     z-index: 3;
     opacity: 1;
     animation: page 2s 2s both;
