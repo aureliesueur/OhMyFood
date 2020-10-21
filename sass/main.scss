@@ -50,7 +50,7 @@ h3 {
     padding: 15px;
     color: white;
     background: linear-gradient(to bottom right, $color-secondary 5%, $color-primary);
-    border-radius: 30px;/*Retoucher le dégradé ?*/
+    border-radius: 30px;
     font-size: 1.1em;
     width: 50%;
     text-align: center;
@@ -159,7 +159,7 @@ Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais �
         bottom: 0; 
         right: 0;
         background: -webkit-linear-gradient($color-secondary, $color-primary);
-        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
+        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas.
         -webkit-text-fill-color: transparent;
         opacity: 0;
         z-index: -1;
@@ -186,7 +186,7 @@ Remarque: pour l'instant les deux actions (hover et active) sont mixées, mais �
         bottom: 0; 
         right: 0;
         background: -webkit-linear-gradient($color-secondary, $color-primary);
-        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas...
+        -webkit-background-clip: text;//Utilisation d'un préfixe navigateur, sinon ne fontionne pas.
         -webkit-text-fill-color: transparent;
         opacity: 0;
         z-index: -1;
