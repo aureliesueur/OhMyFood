@@ -215,7 +215,7 @@ Remarque: pour l'instant les deux actions (hover et active) sont mix√©es, mais √
     left: calc(50% - 75px);
     top: calc(50% - 75px);
     opacity: 0;
-    &:before {
+    &::before {
         animation: spin 3s 250ms forwards linear;
         border: solid 15px transparent;
         border-radius: 50%;
@@ -231,7 +231,7 @@ Remarque: pour l'instant les deux actions (hover et active) sont mix√©es, mais √
         top: 0;
         opacity: 0;
     }
-    &:after {
+    &::after {
         animation: spin 3s 500ms forwards linear;
         border: solid 15px transparent;
         border-radius: 50%;
